@@ -15,6 +15,13 @@ mv ~/.local/state/nvim ~/.local/state/nvim.bak
 mv ~/.cache/nvim ~/.cache/nvim.bak
 ```
 
+### You Can Delete using : 
+ rm -rf ~/.config/nvim
+ rm -rf ~/.local/state/nvim
+ rm -rf ~/.local/share/nvim
+
+### Installation 
+
 #### Create a new user repository from this template
 
 Press the "Use this template" button above to create a new repository to store your user configuration.
@@ -24,7 +31,7 @@ You can also just clone this repository directly if you do not want to track you
 #### Clone the repository
 
 ```shell
-git@github.com:alberto-debug/updated-nvim-configs.git
+git@github.com:alberto-debug/updated-nvim-configs.git ~/.config/nvim
 ```
 
 #### Start Neovim
