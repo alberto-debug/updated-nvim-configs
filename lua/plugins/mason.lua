@@ -25,7 +25,8 @@ return {
         "stylua",
         "goimports",
         "gofumpt",
-        "goimports-reviser",  -- Go imports reviser tool
+        "golines",
+        "goimports-reviser", -- Go imports reviser tool
         -- add more arguments for adding more null-ls sources
       },
     },

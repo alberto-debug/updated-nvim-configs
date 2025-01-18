@@ -20,48 +20,46 @@ require "lazy_setup"
 require "polish"
 
 -- Import Mason, Mason-LSPconfig, and Mason-Null-LS
-local mason_lspconfig = require("mason-lspconfig")
-local mason_null_ls = require("mason-null-ls")
-local lspconfig = require("lspconfig")
+local mason_lspconfig = require "mason-lspconfig"
+local mason_null_ls = require "mason-null-ls"
+local lspconfig = require "lspconfig"
 
 -- Initialize Mason
 require("mason").setup()
 
 -- Setup Mason-LSPconfig for LSP installation
-mason_lspconfig.setup({
-    ensure_installed = { "gopls" },  -- Ensure gopls is installed
-    automatic_installation = true,    -- Automatically install LSPs
-})
+mason_lspconfig.setup {
+  ensure_installed = { "gopls" }, -- Ensure gopls is installed
+  automatic_installation = true, -- Automatically install LSPs
+}
 
 -- Setup Mason-Null-LS for formatters/linters installation
-mason_null_ls.setup({
+mason_null_ls.setup {
   ensure_installed = {
-    "stylua",              -- Lua formatter
-    "goimports",           -- Go imports formatter
-    "gofumpt",             -- Go stricter formatter
-    "goimports-reviser",   -- Go imports reviser tool
+    "stylua", -- Lua formatter
+    "goimports", -- Go imports formatter
+    "golines",
+    "gofumpt", -- Go stricter formatter
+    "goimports-reviser", -- Go imports reviser tool
     -- Add other tools you want to install
   },
-})
+}
 
 -- Configure gopls (Go LSP)
-lspconfig.gopls.setup({
-    on_attach = function(client, bufnr)
-        -- Enable formatting on save
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.format()
-            end,
-        })
-    end,
-    settings = {
-        gopls = {
-            analyses = {
-                unusedparams = true, -- Enable analysis for unused params
-            },
-            staticcheck = true,    -- Enable static code analysis
-        },
+lspconfig.gopls.setup {
+  on_attach = function(client, bufnr)
+    -- Enable formatting on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function() vim.lsp.buf.format() end,
+    })
+  end,
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true, -- Enable analysis for unused params
+      },
+      staticcheck = true, -- Enable static code analysis
     },
-})
-
+  },
+}
