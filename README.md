@@ -16,9 +16,13 @@ mv ~/.cache/nvim ~/.cache/nvim.bak
 ```
 
 ### You Can Delete using : 
+
+```shell
  rm -rf ~/.config/nvim
  rm -rf ~/.local/state/nvim
  rm -rf ~/.local/share/nvim
+
+```
 
 ### Installation 
 
