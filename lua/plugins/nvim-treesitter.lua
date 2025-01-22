@@ -43,8 +43,8 @@ local config = function()
       keymaps = {
         --       init_selection = "<C-s>",
         --     node_incremental = "<C-s>",
-        --   scope_incremental = false,
-        -- node_decremental = "<BS>",
+        scope_incremental = false,
+        node_decremental = "<BS>",
       },
     },
   }

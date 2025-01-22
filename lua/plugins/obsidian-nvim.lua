@@ -27,5 +27,8 @@ return {
       nvim_cmp = true,
       min_chars = 2,
     },
+    ui = {
+      conceallevel = 1, -- Add this to set conceallevel to 1
+    },
   },
 }
