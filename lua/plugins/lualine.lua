@@ -1,23 +1,29 @@
 local config = function()
-  -- Set up lualine with custom configuration
   require("lualine").setup {
     options = {
       globalstatus = true, -- Enable global status line
-      section_separators = { left = "", right = "" }, -- No separators on the sides
-      component_separators = "", -- No separator for components
+      section_separators = { left = "", right = "" }, -- Stylish separators
+      component_separators = { left = "", right = "" }, -- Stylish component separators
       theme = "auto", -- Automatically adapt to the colorscheme
     },
     sections = {
-      lualine_a = { "mode" }, -- Display current mode
+      lualine_a = {
+        { "mode", separator = { left = "", right = "" }, right_padding = 2 }, -- Mode with separators
+      },
       lualine_b = {
-        "filename", -- Show current file name
-        "branch", -- Show Git branch
+        { "filename", symbols = { modified = " ", readonly = " ", unnamed = "" } }, -- Show file status
+        { "branch", icon = "" }, -- Show Git branch
       },
       lualine_c = {
         "%=", -- Center section placeholder
-        { function() return os.date "%H:%M:%S - %d %b %Y" end }, -- Show current time and date
         {
-          "diff", -- Git diff
+          function()
+            return os.date "%H:%M:%S" -- Display only the time
+          end,
+          color = { fg = "#01BAEF", gui = "bold" }, -- Time in blue color
+        },
+        {
+          "diff", -- Git diff with symbols
           symbols = { added = " ", modified = "󰝤 ", removed = " " },
         },
       },
@@ -42,11 +48,23 @@ local config = function()
         },
       },
       lualine_y = {
-        "encoding", -- File encoding (e.g., UTF-8)
-        "fileformat", -- File format (e.g., UNIX, DOS)
-        "progress", -- Progress through the file
+        {
+          function()
+            local current_line = vim.fn.line "."
+            local total_lines = vim.fn.line "$"
+            local chars = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
+            local line_ratio = current_line / total_lines
+            local index = math.ceil(line_ratio * #chars)
+            return chars[index]
+          end,
+          color = { fg = "#A9FF68", gui = "bold" }, -- Animated status bar
+        },
+        "encoding", -- File encoding
+        "fileformat", -- File format
       },
-      lualine_z = { "location" }, -- Current line/column
+      lualine_z = {
+        { "location", separator = { left = "", right = "" } }, -- Location with separators
+      },
     },
     inactive_sections = {
       lualine_a = { "filename" }, -- Show filename in inactive mode
