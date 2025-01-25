@@ -40,7 +40,6 @@ mason_null_ls.setup {
     "goimports", -- Go imports formatter
     "golines",
     "gofumpt", -- Go stricter formatter
-    "goimports-reviser", -- Go imports reviser tool
     -- Add other tools you want to install
   },
 }
