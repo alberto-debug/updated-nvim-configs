@@ -10,11 +10,18 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Validate that Lazy.nvim is available
 if not pcall(require, "lazy") then
-  -- stylua: ignore
-  vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+  -- stylua: ignore proposal
+  vim.api.nvim_echo(
+    { { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } },
+    true,
+    {}
+  )
   vim.fn.getchar()
   vim.cmd.quit()
 end
+
+-- Set conceallevel for obsidian.nvim UI features
+vim.opt.conceallevel = 2 -- Added this line
 
 require "lazy_setup"
 require "polish"
@@ -41,7 +48,6 @@ mason_null_ls.setup {
     "golines",
     "gofumpt", -- Go stricter formatter
     "goimports-reviser", -- Go imports reviser tool
-    -- Add other tools you want to install
   },
 }
 
